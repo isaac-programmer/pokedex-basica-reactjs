@@ -8,7 +8,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route exact path="/" element={<HomePage/>}/>
+          <Route path="/" element={<HomePage/>}/>
           <Route path="/pokemon/:id" element={<Details/>}/>
           <Route path="/:type" element={<HomePageTypes/>}/>
         </Routes>

@@ -4,14 +4,14 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getPoke } from '../api/api';
 import './estilos/style.css';
-import { Card, CardMedia, CardContent, IconButton } from '@material-ui/core';
+import { Card, CardMedia, CardContent, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from "@mui/material/styles";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 
 
-const ExpandMore = styled((props) => {
+const ExpandMore = styled((props: any) => {
     const { expand, ...other } = props;
 
     return <IconButton {...other} />;
@@ -96,7 +96,7 @@ export default function Details() {
                     </CardActions>
 
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <ul class="listaDetails">
+                        <ul className="listaDetails">
                             <li>Peso em hectogramas (hg): {pokemon.weight}</li>
 
                             <li>Altura em decímetros (dm): {pokemon.height}</li>

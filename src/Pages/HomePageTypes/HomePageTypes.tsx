@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getTypes } from '../api/api';
-import { Grid, Card, CardMedia, CardContent, CardActions } from '@mui/material';
-import IconButton from '@material-ui/core/IconButton';
+import { Grid, Card, CardMedia, CardContent, CardActions, IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ListaDeTipos from '../ListaDeTipos/ListaDeTipos';
@@ -10,8 +9,8 @@ import "./estilos/colorTypes.css";
 import "./estilos/style.css";
 
 export default function HomePageTypes() {
-    const [pokemons, setPokemons] = useState([]);
-    const [tipos, setTipos] = useState([]);
+    const [pokemons, setPokemons] = useState<any[]>([]);
+    const [tipos, setTipos] = useState<any[]>([]);
 
     useEffect(() => {
         getTypes('type', setTipos);

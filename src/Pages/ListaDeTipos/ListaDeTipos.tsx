@@ -4,7 +4,7 @@ import { getPokemonsType } from '../api/api';
 import './estilos/styles.css';
 
 
-export default function ListaDeTipos({ tipos, pokes }) {
+export default function ListaDeTipos({ tipos, pokes }: any) {
 
     return (
         <>
