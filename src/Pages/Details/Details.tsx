@@ -2,14 +2,13 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { getPoke } from '../api/api';
+import { getPokemons } from '../../services';
 import './estilos/style.css';
 import { Card, CardMedia, CardContent, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from "@mui/material/styles";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
-
 
 const ExpandMore = styled((props: any) => {
     const { expand, ...other } = props;
@@ -56,7 +55,7 @@ export default function Details() {
     });
 
     useEffect(() => {
-        getPoke(`/pokemon/${id}`, setPokemon);
+        getPokemons(`/pokemon/${id}`, setPokemon, "");
     }, [id]);
 
     return (

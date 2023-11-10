@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import HomePage from "./Pages/HomePage";
-import Details from "./Pages/Details";
-import HomePageTypes from "./Pages/HomePageTypes";
+import HomePage from "./pages/HomePage";
+import Details from "./pages/Details";
+import HomePageTypes from "./pages/HomePageTypes";
 
 function App() {
   return (
@@ -9,8 +9,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
-          <Route path="/pokemon/:id" element={<Details/>}/>
           <Route path="/:type" element={<HomePageTypes/>}/>
+          <Route path="/pokemon/:id" element={<Details/>}/>
         </Routes>
       </Router>
     </>

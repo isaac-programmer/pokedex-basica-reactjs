@@ -1,18 +1,17 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios';
 
+export const pokeApi = axios.create({
+  baseURL: 'https://pokeapi.co/api/v2/',
+});
 
-export const api = axios.create({
-  baseURL: 'https://pokeapi.co/api/v2/'
-})
-
-export const getPoke = async (url, setDados, pagina) => {
-
+export const getPokemons = async (url: string, setDados: any, pagina: any) => {
   if (url === `/pokemon?limit=15&offset=${pagina}`) {
-    let promisesPokemons = [];
-    api.get(url).then((response) => {
+    let promisesPokemons: Promise<AxiosResponse<any>>[] = [];
+
+    pokeApi.get(url).then((response) => {
       for (let i = 0; i < response.data.results.length; i++) {
         let urlDoPokemon = response.data.results[i].url.slice(25, 38);
-        promisesPokemons.push(api.get(urlDoPokemon).then(response => response.data))
+        promisesPokemons.push(pokeApi.get(urlDoPokemon).then(response => response.data))
       }
 
       Promise.all(promisesPokemons).then(pokemons => {
@@ -20,18 +19,19 @@ export const getPoke = async (url, setDados, pagina) => {
       });
     });
   } else {
-    const resposta = await api.get(url);
+    const resposta = await pokeApi.get(url);
     setDados(resposta.data);
     localStorage.setItem('pokemon_selecionado', resposta.data.name);
   }
 }
 
-export const getTypes = async (url, setDados) => {
-  let promisesTypes = [];
-  api.get(url).then((response) => {
+export const getTypes = async (url: string, setDados: any) => {
+  let promisesTypes: Promise<AxiosResponse<any>>[] = [];
+
+  pokeApi.get(url).then((response) => {
     for (let i = 0; i < response.data.results.length - 2; i++) {
       let urlDoType = response.data.results[i].url.slice(25, 38);
-      promisesTypes.push(api.get(urlDoType).then(response => response.data))
+      promisesTypes.push(pokeApi.get(urlDoType).then(response => response.data))
     }
 
     Promise.all(promisesTypes).then(types => {
@@ -40,24 +40,16 @@ export const getTypes = async (url, setDados) => {
   });
 }
 
-// export const getType = async (url, setDado) => {
-//   let resposta = api.get(url);
-//   console.log(resposta);
-//   setDado(resposta)
-// }
-
-export function getPokemonsType(pokemonsDoTipo, setDado) {
-
-  let promisesPokemonsDoTipo = [];
-  let pokemons = [];
+export function getPokemonsType(pokemonsDoTipo: any[], setDado: any) {
+  let promisesPokemonsDoTipo: Promise<AxiosResponse<any>>[] = [];
+  let pokemons: any[] = [];
 
   for (let i = 0; i < pokemonsDoTipo.length; i++) {
     let url = pokemonsDoTipo[i].pokemon.url.slice(25, 39)
-    promisesPokemonsDoTipo.push(api.get(url));
+    promisesPokemonsDoTipo.push(pokeApi.get(url));
   }
 
   Promise.all(promisesPokemonsDoTipo).then((pokemonsDoTipo) => {
-    
     for (let i = 0; i < pokemonsDoTipo.length; i++) {
       pokemons[i] = pokemonsDoTipo[i].data;
     }

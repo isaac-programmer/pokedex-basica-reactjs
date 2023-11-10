@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import { getPokemonsType } from '../api/api';
+import { getPokemonsType } from '../../services';
 import './estilos/styles.css';
 
-
 export default function ListaDeTipos({ tipos, pokes }: any) {
-
     return (
         <>
             {

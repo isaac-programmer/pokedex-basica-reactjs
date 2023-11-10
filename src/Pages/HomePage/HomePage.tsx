@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getPoke, getTypes } from '../api/api';
+import { getPokemons, getTypes } from '../../services';
 import { Grid, Card, CardMedia, CardContent, CardActions, IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import "./estilos/style.css";
 import "./estilos/colorTypes.css";
-import ListaDeTipos from '../ListaDeTipos/ListaDeTipos';
+import ListaDeTipos from '../ListaDeTipos/';
 
 export default function HomePage() {
   const [pokemons, setPokemons] = useState<any[]>([]);
@@ -15,7 +15,7 @@ export default function HomePage() {
 
 
   useEffect(() => {
-    getPoke(`/pokemon?limit=15&offset=${pagina}`, setPokemons, pagina);
+    getPokemons(`/pokemon?limit=15&offset=${pagina}`, setPokemons, pagina);
     getTypes('type', setTipos);
   }, [pagina]);
 
@@ -99,14 +99,14 @@ export default function HomePage() {
           </ul>
           <button className="botao" onClick={() => {
             setPagina(pagina - 15)
-            getPoke(`/pokemon?limit=15&offset=${pagina}`,
+            getPokemons(`/pokemon?limit=15&offset=${pagina}`,
               setPokemons,
               pagina
             )
           }} >vinda</button>
           <button className="botao" onClick={() => {
             setPagina(pagina + 15)
-            getPoke(`/pokemon?limit=15&offset=${pagina}`,
+            getPokemons(`/pokemon?limit=15&offset=${pagina}`,
               setPokemons,
               pagina
             )
