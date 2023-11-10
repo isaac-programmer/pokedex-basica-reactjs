@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useParams } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getTypes } from '../api/api';
 import { Grid, Card, CardMedia, CardContent, CardActions } from '@mui/material';
