@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { getPokemonsType } from "../../services";
 
-export default function TypesList({ types, pokes }: any) {
+export default function TypesList({ types, setSelectType }: any) {
   return (
     <>
       {types?.map((type: any, index: number) => {
@@ -9,12 +8,9 @@ export default function TypesList({ types, pokes }: any) {
           <li key={index}>
             <Link
               className={`type ${type.name}`}
-              to={`/${type.name}`}
+              to={`/`}
               onClick={() => {
-                getPokemonsType(
-                  inserirNomeTipo(type.name, types),
-                  pokes.funcao
-                );
+                setSelectType(type.name);
               }}
             >
               {type.name}
@@ -24,12 +20,4 @@ export default function TypesList({ types, pokes }: any) {
       })}
     </>
   );
-}
-
-function inserirNomeTipo(name: string, types: any) {
-  for (let i = 0; i < types.length; i++) {
-    if (name === types[i].name) {
-      return types[i].pokemon;
-    }
-  }
 }

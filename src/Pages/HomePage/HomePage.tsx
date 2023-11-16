@@ -12,17 +12,33 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import TypesList from "../TypesList";
 import "./styles/style.scss";
-import { getPokemons, getTypes } from "../../services";
+import { getPokemons, getPokemonsType, getTypes } from "../../services";
 
 export default function HomePage() {
-  const [tipos, setTipos] = useState<any[]>([]);
+  const [types, setTypes] = useState<any[]>([]);
   const [pagina, setPagina] = useState<number>(0);
+  const [selectType, setSelectType] = useState<string>("");
   const [pokemons, setPokemons] = useState<any[]>([]);
+
+  function pokemonsType(name: string, types: any) {
+    for (let i = 0; i < types.length; i++) {
+      if (name === types[i].name) {
+        console.log(types[i], types[i].pokemon);
+        return types[i].pokemon;
+      }
+    }
+  }
 
   useEffect(() => {
     getPokemons(`/pokemon?limit=15&offset=${pagina}`, setPokemons, pagina);
-    getTypes("type", setTipos);
+    getTypes("type", setTypes);
   }, [pagina]);
+
+  useEffect(() => {
+    if(selectType !== "") {
+      getPokemonsType(pokemonsType(selectType, types), setPokemons);
+    }
+  }, [selectType]);
 
   return (
     <section id="conteudo">
@@ -31,10 +47,7 @@ export default function HomePage() {
           <h1>Pokemons</h1>
 
           <ul className="types-list">
-            <TypesList
-              types={tipos}
-              pokes={{ pokes: pokemons, funcao: setPokemons }}
-            />
+            <TypesList types={types} setSelectType={setSelectType} />
           </ul>
 
           <section className="cards">
