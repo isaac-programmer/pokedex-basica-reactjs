@@ -40,7 +40,8 @@ export const getTypes = async (url: string, setDados: any) => {
   });
 }
 
-export function getPokemonsType(pokemonsDoTipo: any[], setDado: any) {
+export function getPokemonsType(pokemonsDoTipo: any[], setPokemons: any) {
+  console.log(pokemonsDoTipo);
   let promisesPokemonsDoTipo: Promise<AxiosResponse<any>>[] = [];
   let pokemons: any[] = [];
 
@@ -53,7 +54,7 @@ export function getPokemonsType(pokemonsDoTipo: any[], setDado: any) {
     for (let i = 0; i < pokemonsDoTipo.length; i++) {
       pokemons[i] = pokemonsDoTipo[i].data;
     }
-    console.log(pokemons);
-    setDado(pokemons)
+  
+    setPokemons(pokemons);
   })
 }
